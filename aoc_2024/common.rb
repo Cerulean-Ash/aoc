@@ -2,8 +2,15 @@ def get_data(file, regex)
   File.read(file).split(regex)
 end
 
-def get_rows_and_columns(file, regex)
-  getData(file, regex).map { |line| line.split('') }
+def get_rows_and_columns(file, row_seperator_regex, col_seperator_regex)
+  get_data(file, row_seperator_regex)
+  .map { |line| line.split(col_seperator_regex) }
+end
+
+
+def get_rows_and_columns_to_int(file, row_seperator_regex, col_seperator_regex)
+  get_data(file, row_seperator_regex)
+  .map { |line| line.split(col_seperator_regex).map(&:to_i) }
 end
 
 def split_file_of_two_lists_side_by_side_seperated_by_spaces_alt(file)
